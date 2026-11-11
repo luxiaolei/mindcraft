@@ -28,3 +28,6 @@ tasks/construction_tasks/train/**
 server_data*
 **/.DS_Store
 src/mindcraft-py/__pycache__/
+
+# Private local PoC config (keep example checked in)
+.env.poc

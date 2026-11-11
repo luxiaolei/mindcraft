@@ -1,0 +1,54 @@
+# Local-only development stack. NOT for public Internet deployment.
+# Minecraft EULA is not automatically accepted.
+services:
+  minecraft:
+    image: itzg/minecraft-server:java21
+    environment:
+      EULA: "${MINECRAFT_EULA:-FALSE}"
+      TYPE: "PAPER"
+      VERSION: "1.21.6"
+      ONLINE_MODE: "FALSE"
+      MAX_PLAYERS: "3"
+      MEMORY: "3G"
+      DIFFICULTY: "peaceful"
+      ENABLE_RCON: "FALSE"
+      SPAWN_PROTECTION: "0"
+      MOTD: "AI English Co-Player (local PoC)"
+    ports:
+      - "127.0.0.1:25565:25565"
+    volumes:
+      - ../server_data_poc:/data
+    healthcheck:
+      test: ["CMD", "mc-health"]
+      start_period: 120s
+      interval: 20s
+      timeout: 10s
+      retries: 15
+
+  mindcraft:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    environment:
+      SETTINGS_JSON: >-
+        {"auto_open_ui":false,"host":"minecraft","port":25565,
+         "auth":"offline","base_profile":"assistant",
+         "profiles":["./poc/english-buddy.json"],
+         "allow_insecure_coding":false,
+         "only_chat_with":[],"load_memory":false,
+         "speak":false,"chat_ingame":true,"language":"en",
+         "render_bot_view":false,"max_commands":4,
+         "blocked_actions":["!newAction","!attack","!attackPlayer",
+           "!setMode","!digDown","!discard","!givePlayer",
+           "!takeFromChest","!putInChest","!startConversation",
+           "!tradeWithVillager","!checkBlueprint","!checkBlueprintLevel",
+           "!getBlueprint","!getBlueprintLevel"],
+         "init_message":"Say hello as Buddy in one short English sentence and ask the player what they want to build."}
+    volumes:
+      - ../keys.json:/app/keys.json:ro
+      - ../bots:/app/bots
+    depends_on:
+      minecraft:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
