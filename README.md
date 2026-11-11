@@ -1,3 +1,21 @@
+# AI English Co-Player — Experimental fork
+
+This fork is an **in-progress AI English co-player PoC** for Minecraft Java Edition. It is **not** a completed real-time voice or children's learning product. The original Mindcraft README is preserved below.
+
+- [PoC overview and run commands](poc/README.md)
+- [Product requirements (PRD)](docs/PRD_ENGLISH_COPLAYER.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Action plan](docs/DELIVERY_PLAN.md)
+- [Acceptance metrics](docs/ACCEPTANCE.md)
+- [MBP local runbook](docs/MBP_RUNBOOK.md)
+- [Learning evidence model](docs/LEARNER_MODEL.md)
+- [Safety and licensing](docs/SECURITY_AND_LICENSE.md)
+- [Actual verification status](docs/VERIFICATION.md)
+
+**Status:** GitHub fork and local config/test scaffold. Do not expose the offline-mode server publicly. Minecraft EULA and legitimate game accounts are required as applicable. Do not commit provider keys or child data.
+
+---
+
 <h1 align="center">🧠mindcraft⛏️</h1>
 <h1 align="center">
   <a href="https://trendshift.io/repositories/14816" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14816" alt="mindcraft-bots%2Fmindcraft | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
